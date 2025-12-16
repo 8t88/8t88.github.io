@@ -21,11 +21,12 @@
 title: Benjamin Clarke
 #email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Data Scientist committed to learning as much as possible
+  Data Scientist committed to continual learning and discovery
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 github_username:  8t88
+linkedin_username: bcclarke
 
 # Build settings
 theme: minima
