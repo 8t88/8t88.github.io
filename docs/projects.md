@@ -5,10 +5,11 @@ permalink: /projects/
 ---
 
 ## Machine Learning Applications
-
+![Bio Pic](./assets/img/books.jpeg){:width="8%"}
 [Audiobook Converter](https://github.com/8t88/audiobook_converter)
 Program that takes a text file and converts it into an audiobook.
 
+![Bio Pic](./assets/img/birds.jpg){:width="8%"}
 [Morning Maestro](https://github.com/8t88/Morning-Maestro) 
 Web app for generating dawn songs from a selection of birds.
 
