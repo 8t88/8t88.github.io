@@ -1,14 +1,10 @@
 ---
 layout: post
-title: TTS Timeline
+title: A Timeline of TTS models
 permalink: /blog/tts_timeline
 ---
 
-# A Timeline of TTS models
-
-## A Decade of Innovation
-
-January 5, 2026
+### A Decade of Innovation
 
 Audio data has always captured my interest the most out of the various machine learning modalities. This is largely because of its seeming esoteric nature, particularly when it comes to speech vocalizations. If you were to look at a waveform plot or a spectrogram, it isn’t readily apparent how these data outputs map to words and phrases. With the explosive growth of generative machine learning in the past decade, I’ve tried to keep informed about the development of audio modeling, especially Text-to-Speech (TTS) systems.
 
