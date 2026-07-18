@@ -1,3 +1,9 @@
+---
+layout: post
+title: Vector Quantization and Continous Codes in Audio ML
+permalink: /blog/vq_cont_codes
+---
+
 Quantization has become highly [incorporated across the range](https://developer.nvidia.com/blog/model-quantization-concepts-methods-and-why-it-matters/) of Machine Learning and GenAI use cases. Aimed at finding gains in storage and computational efficiency, this method is largely used in systems that deal with image and audio data classification and generation, although potential use cases exist in other areas such as [time series](https://medium.com/@waleed.physics/the-future-of-time-series-modeling-tokenization-through-vector-quantization-77ed3bc745d8). Quantization helps to reduce memory requirements and speeds up computation, while trading off some level of accuracy.  
    
 It is important to realize though that depending on context quantization may be applied to different parts of the machine learning pipeline. I hear it used most often in the context of quantization of weights, where the format of model parameters are reduced to lower-precision values, e.g. from FP32 to FP8. Quantization of weights typically involves some rounding and/or clippling around a “zero point”, as well as decisions around how much of the parameter space you want to quantize and when you want quantization to take place in the training process. Broadly speaking, you have two options: PTQ and QAT. Post-training quantization (PTQ) takes place after the training has occurred, whereas [Quantization-Aware Training](https://www.ibm.com/think/topics/quantization-aware-training) (QAT) is incorporated into the training process.
@@ -11,15 +17,19 @@ Another important context though where quantization gets applied is in the data 
 As a quick review, an audio codec is a system that compresses the information contained in audio data (i.e. the waveform) into latent space. The results of this compression are called “codes”.  
 Vector Quantization (VQ) forms a key component of the codec. In our real-world example, [SoundStream](https://arxiv.org/pdf/2107.03312) runs the audio waveform through an encoder then applies Residual Vector Quantization (RVQ) to the encoded audio data, after which the result is run through the decoder, thus producing the audio tokens.   
 So the overall process looks like: continuous data inputs get translated into continuous latent representations, then the quantization maps continuous latent representations into discrete embeddings before being further transformed. This process is incorporated into the overall machine learning pipeline that generates audio, as the below picture illustrates.  
-![vq_in_audio_ml](../assets/img/vq_post/vq_arch.png) 
+
+![vq_in_audio_ml](../assets/img/vq_post/vq_arch.png){:width="50%"}
+
 [source](https://towardsdatascience.com/interpretable-latent-spaces-using-space-filling-vector-quantization-e4eb26691b14/)
 
 ### Quantization Processes
 
 So what does the mechanism of Vector Quantization actually look like? This is a different process from the quantization used for model parameters. In the data quantization context we are not simply truncating the precision; instead, we are trying to map each data point to the closest low-precision value by using a distance function to calculate the space between data which is typically very high-dimensional, thus maintaining a semantic accuracy while achieving data compression,. VQ commonly uses clustering methods such as K-means to cluster similar parts of the spectrogram. It then maps these clustered data points to the nearest codebook point.   
-A codebook is a collection of representative vectors (codewords), and each input feature vector is assigned to the nearest codeword in the codebook. The index of the assigned codeword in the codebook then becomes a discrete token.   
-![codebook_diagram](../assets/img/vq_post/codebook_diagram.png) 
-Vector Quantization Operation \[[source](https://towardsdatascience.com/interpretable-latent-spaces-using-space-filling-vector-quantization-e4eb26691b14/)\]
+A codebook is a collection of representative vectors (codewords), and each input feature vector is assigned to the nearest codeword in the codebook. The index of the assigned codeword in the codebook then becomes a discrete token. 
+
+![codebook_diagram](../assets/img/vq_post/codebook_diagram.png){:width="75%"}
+
+[source](https://towardsdatascience.com/interpretable-latent-spaces-using-space-filling-vector-quantization-e4eb26691b14/)
 
 If you want to examine the finer details of vector-quantization, [this](https://github.com/lucidrains/vector-quantize-pytorch) repo provides examples of the different implementations. Furthermore, [this](https://huggingface.co/blog/ariG23498/understand-vq) post from Hugging Face gives a good walkthrough of the steps involved in quantization, showing the process of flattening, computing distance, and selecting the closest codebook vector.
 
