@@ -48,13 +48,13 @@ CNNs, RNNs, and the like do not satisfy these requirements.
 To this end, a number of new Graph ML architectures have been [developed](https://research.google/blog/the-evolution-of-graph-learning/) in an attempt to fuse the benefits of neural networks with the intricacies of graph structures, and to make  learning on these huge structures feasible. After the foundation work of the [Graph Neural Network](https://ieeexplore.ieee.org/abstract/document/1517930) (GNN), later developments included [Graph Attention Networks](https://petar-v.com/GAT/), [GraphSAGE](https://snap.stanford.edu/graphsage/), and [Graph Isomorphism Networks](https://arxiv.org/pdf/1810.00826v3.pdf), but the most common type of model would probably be [Graph Convolutional Networks](https://tkipf.github.io/graph-convolutional-networks/).   
 GCNs are based on encoding the graph data into matrices then plugging that data into convolutional layers, following a neural network architecture similar to others such as the LSTM.  The key insight is to encode the graph into a matrix built around the following equation:
 
-	$\widehat{A}\ =\ {D}^{-\frac{1}{2}}A{'D}^{-\frac{1}{2}}$
+![Matrix Formula](../assets/img/intro_graph_post/formula_one.png)
 
 Where A’ is the normalized adjacency matrix and D is the diagonalization. A good walkthrough of the derivation for this formula can be found [here](https://medium.com/@jrosseruk/demystifying-gcns-a-step-by-step-guide-to-building-a-graph-convolutional-network-layer-in-pytorch-09bf2e788a51).
 
 The original GCN paper then defined the forward layer using the formula
 
-	$Z\ =\ f\ (X,\ A)\ =\ softmax(\ \widehat{A}\ ReLU(\widehat{A}XW\ (0))W\ (1))$
+![Conv Layer Formula](../assets/img/intro_graph_post/formula_two.png)
 
 The high level view of the system would then look like the diagram below, taken from the paper itself:  
 ![GCN Diagram](../assets/img/intro_graph_post/GCN_diagram.png)
